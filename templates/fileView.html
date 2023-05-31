@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URL SRT</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/Logo.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fileView.css') }}">
+  </head>
+    <body>
+        <ul>
+        {% for item in data %}
+            <li>
+                <a href="{{ request.host_url }}{{ item }}">
+                 <p><span style="font-weight: bold;">{{ item }}</span></a>
+                   <br>▶ {{ data[item] }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>

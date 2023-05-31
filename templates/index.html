@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URL Shortener</title>
+
+    <meta property="og:title" content="🔗 URL Short">
+    <meta property="og:description" content="링크 단축기 URL Short 입니다.">
+    <!-- <meta property="og:image" content="{{ url_for('static', filename='images/Logo.png') }}"> -->
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+      
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/Logo.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+  </head>
+  <body>
+    <form action="/" method="POST">
+        <label for="url">
+            <img src="{{ url_for('static', filename='images/Logo.png') }}">
+            <span style="font-weight: bold; font-size: 10px;">긴 URL ( 웹주소 ) 를 입력하세요.</span>
+        </label>
+        
+        <input type="url" name="url" id="url" placeholder="https:// ..." autocomplete="off" required>
+        <button type="submit">Shorten</button>
+    </form>
+   <p style="position: absolute; bottom: 0; left: 10px; font-size: 10px;">
+       ⓥ 2.23.55
+       <!-- ⓒ HanLuca : yoonsj._.0798 (<a href="https://www.instagram.com/yoonsj._.0798/" target="_blank">instagram</a>)
+   </p> -->
+  </body>
+</html>
+
+<script>
+    // 페이지가 로드될 때 실행되는 함수
+    // window.onload = function() {
+    //     alert('❗공지\n데이터베이스가 초기화됨의 따라, 단축해두었던 링크를 다시 단축해야합니다.');
+    //     // alert('[ ⓥ 2.23.55 ]\n사이트가 업데이트 되었습니다.\n변경된 사항들을 살펴보세요!');
+    // };
+</script>

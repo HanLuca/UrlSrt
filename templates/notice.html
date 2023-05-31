@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta property="og:title" content="🔗 단축된 링크입니다.">
+    <meta property="og:description" content="이곳을 눌러 링크 확인하기">
+    <!-- <meta property="og:image" content="{{ url_for('static', filename='images/Logo.png') }}"> -->
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+    
+    <title>Loading</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/Logo.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/notice.css') }}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                window.location.href = "{{ url }}";
+            }, 2500);
+        });
+    </script>
+</head>
+<body>
+    {% if stas != None %}
+    <p>{{ error }}</p>
+    {% else %}
+    <form action="/" method="POST">
+        <p style="font-size: 25px; font-weight: bold;">2초 후에 이동합니다</p> <br>
+        <p>이 링크는 urlsrt 로 단축된 링크입니다</p>
+        <button type="button" onclick="window.open('https://urlsrt.kro.kr', '_blank')">Try it!</button>
+    </form>
+    
+   <p style="position: absolute; bottom: 0; left: 10px; font-size: 10px;">
+       ⓥ 2.23.55<br>
+       <!-- ⓒ HanLuca : yoonsj._.0798 (<a href="https://www.instagram.com/yoonsj._.0798/" target="_blank" style="color: pink;">instagram</a>) -->
+   </p>
+    {% endif %}
+</body>
+</html>

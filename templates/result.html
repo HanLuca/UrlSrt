@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URL Shortener</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/Logo.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/result.css') }}">
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div class="input-container">
+        <input type="text" id="short-url" value="{{ request.host_url }}{{ short_url }}" readonly>
+    </div>
+    <div class="button-container">
+        <button type="button" onclick="copyText()">Copy</button>
+        <a href="/"><button type="button">Return</button></a>
+    </div>
+
+    <script>
+        function copyText() {
+            // 선택한 텍스트 복사
+            var text = document.querySelector("input").value;
+            var inputEl = document.getElementById("short-url");
+        
+            navigator.clipboard.writeText(text)
+                .then(function() {
+                    console.log('Text copied to clipboard');
+                    inputEl.value = "Copied!"
+                    setTimeout(function() {
+                        inputEl.value = text;
+                    }, 1000);
+                })
+                .catch(function() {
+                    console.error('Failed to copy text to clipboard');
+            });
+        }
+    </script>
+  </body>
+</html>

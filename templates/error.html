@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URL SRT</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/Logo.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/error.css') }}">
+  </head>
+    <body>
+        <form>
+            {{ error }} <br>
+            <button type="button" onclick="location.href='https://urlsrt.kro.kr'">Back</button>
+        </form>
+    </body>
+</html>
