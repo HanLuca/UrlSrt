@@ -60,17 +60,19 @@ def redirect_to_url(short_url):
 @app.route('/uptime')
 def uptime():
     url = "https://api.uptimerobot.com/v2/getMonitors"
+    monitorsList = ["793840902", "794492252"]
+    datas = []
 
-    payload = {
-        "api_key": UPTIME_APIKEY,
-        "format": "json",
-        "monitors": "793840902"
-    }
+    for i in monitorsList:
+        payload = {
+            "api_key": UPTIME_APIKEY,
+            "format": "json",
+            "monitors": i
+        }
+        response = requests.post(url, data=payload)
+        datas.append(f"{response.json()['monitors'][0]['friendly_name']} : {response.json()['stat']}")
 
-    response = requests.post(url, data=payload)
-    data = response.json()
-
-    return jsonify(data)
+    return datas
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
