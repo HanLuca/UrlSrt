@@ -2,15 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify, R
 import requests, json, string, random, os, asyncio
 from control import Data
 
+from secret import UPTIME_APIKEY
+
 app = Flask(__name__)
-
-# 데이터베이스 파일 경로
-DATABASE_FILE = 'links.json'
-
-# 데이터베이스 초기화
-if not os.path.exists(DATABASE_FILE):
-    with open(DATABASE_FILE, 'w') as f:
-        json.dump({}, f)
 
 # 짧은 URL 생성 함수
 def generate_short_url():
@@ -55,32 +49,20 @@ def index():
 # 짧은 URL 리다이렉트
 @app.route('/<short_url>')
 def redirect_to_url(short_url):
-    if short_url == "fv":
-        return redirect(file_view)
+    original_url = get_url(short_url)
+    if original_url is not None:
+        return render_template('notice.html', url=original_url, stas=None)
+
     else:
-        original_url = get_url(short_url)
-        if original_url is not None:
-            return render_template('notice.html', url=original_url, stas=None)
-
-        else:
-            return render_template('notice.html', url=original_url, stas="URL Error")
-
-@app.route('/fv')
-def file_view():
-    with open('links.json') as f:
-        data = json.load(f)
-    return render_template('fileView.html', data=data)
+        return render_template('notice.html', url=original_url, stas="URL Error")
 
 
-MONITOR_ID = "793840902"
-url = "https://api.uptimerobot.com/v2/getMonitors"
-
-@app.route('/ut')
+@app.route('/uptime')
 def uptime():
     url = "https://api.uptimerobot.com/v2/getMonitors"
 
     payload = {
-        "api_key": os.environ['API_KEY'],
+        "api_key": UPTIME_APIKEY,
         "format": "json",
         "monitors": "793840902"
     }
